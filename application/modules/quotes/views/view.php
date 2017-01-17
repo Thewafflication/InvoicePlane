@@ -135,19 +135,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" id="btn_generate_pdf"
-                       data-quote-id="<?php echo $quote_id; ?>">
-                        <i class="fa fa-print fa-margin"></i>
-                        <?php echo trans('download_pdf'); ?>
-                    </a>
-                </li>
-                <li>
-                    <a href="<?php echo site_url('mailer/quote/' . $quote->quote_id); ?>">
-                        <i class="fa fa-send fa-margin"></i>
-                        <?php echo trans('send_email'); ?>
-                    </a>
-                </li>
-                <li>
                     <a href="#" id="btn_quote_to_invoice"
                        data-quote-id="<?php echo $quote_id; ?>">
                         <i class="fa fa-refresh fa-margin"></i>
@@ -168,16 +155,14 @@
                 </li>
             </ul>
         </div>
-
-        <a href="#" class="btn_add_row btn btn-sm btn-default">
-            <i class="fa fa-plus"></i>
-            <?php echo trans('add_new_row'); ?>
+        <a href="<?php echo site_url('mailer/quote/' . $quote->quote_id); ?>" class="btn btn-sm btn-default">
+			<i class="fa fa-send fa-margin"></i>
+			<?php echo trans('send_email'); ?>
         </a>
-        <a href="#" class="btn_add_product btn btn-sm btn-default">
-            <i class="fa fa-database"></i>
-            <?php echo trans('add_product'); ?>
+        <a href="#" class="btn btn-sm btn-default" id="btn_generate_pdf" data-quote-id="<?php echo $quote_id; ?>">
+			<i class="fa fa-print fa-margin"></i>
+			<?php echo trans('download_pdf'); ?>
         </a>
-
         <a href="#" class="btn btn-sm btn-success ajax-loader" id="btn_save_quote">
             <i class="fa fa-check"></i>
             <?php echo trans('save'); ?>
@@ -319,7 +304,16 @@
                 </div>
             </div>
         </div>
-
+		<div id="toolbar" style="margin-bottom:15px;">
+			<a href="#" class="btn_add_row btn btn-sm btn-default">
+				<i class="fa fa-plus"></i>
+				<?php echo trans('add_new_row'); ?>
+			</a>
+			<a href="#" class="btn_add_product btn btn-sm btn-default">
+				<i class="fa fa-database"></i>
+				<?php echo trans('add_product'); ?>
+			</a>
+        </div>
         <?php $this->layout->load_view('quotes/partial_item_table'); ?>
 
         <hr/>

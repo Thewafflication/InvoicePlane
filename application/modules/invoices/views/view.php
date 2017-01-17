@@ -168,19 +168,6 @@ if ($this->config->item('disable_read_only') == true) {
                         <?php echo trans('enter_payment'); ?>
                     </a>
                 </li>
-                <li>
-                    <a href="#" id="btn_generate_pdf"
-                       data-invoice-id="<?php echo $invoice_id; ?>">
-                        <i class="fa fa-print fa-margin"></i>
-                        <?php echo trans('download_pdf'); ?>
-                    </a>
-                </li>
-                <li>
-                    <a href="<?php echo site_url('mailer/invoice/' . $invoice->invoice_id); ?>">
-                        <i class="fa fa-send fa-margin"></i>
-                        <?php echo trans('send_email'); ?>
-                    </a>
-                </li>
                 <li class="divider"></li>
                 <li>
                     <a href="#" id="btn_create_recurring"
@@ -206,17 +193,16 @@ if ($this->config->item('disable_read_only') == true) {
                 <?php } ?>
             </ul>
         </div>
-
-        <?php if ($invoice->is_read_only != 1) { ?>
-            <a href="#" class="btn_add_row btn btn-sm btn-default">
-                <i class="fa fa-plus"></i> <?php echo trans('add_new_row'); ?>
-            </a>
-            <a href="#" class="btn_add_product btn btn-sm btn-default">
-                <i class="fa fa-database"></i>
-                <?php echo trans('add_product'); ?>
-            </a>
-        <?php }
-        if ($invoice->is_read_only != 1 || $invoice->invoice_status_id != 4) { ?>
+        <a href="<?php echo site_url('mailer/invoice/' . $invoice->invoice_id); ?>" class="btn btn-sm btn-default">
+        <i class="fa fa-send fa-margin"></i>
+        <?php echo trans('send_email'); ?>
+        </a>
+        <a href="#" id="btn_generate_pdf" class="btn btn-sm btn-default"
+         data-invoice-id="<?php echo $invoice_id; ?>">
+        <i class="fa fa-print fa-margin"></i>
+        <?php echo trans('download_pdf'); ?>
+        </a>
+        <?php if ($invoice->is_read_only != 1 || $invoice->invoice_status_id != 4) { ?>
             <a href="#" class="btn btn-sm btn-success ajax-loader" id="btn_save_invoice">
                 <i class="fa fa-check"></i> <?php echo trans('save'); ?>
             </a>
@@ -401,7 +387,17 @@ if ($this->config->item('disable_read_only') == true) {
                 </div>
 
             </div>
-
+			<?php if ($invoice->is_read_only != 1) { ?>
+				<div id="toolbar" style="margin-bottom:15px;" >
+					<a href="#" class="btn_add_row btn btn-sm btn-default">
+						<i class="fa fa-plus"></i> <?php echo trans('add_new_row'); ?>
+					</a>
+					<a href="#" class="btn_add_product btn btn-sm btn-default">
+						<i class="fa fa-database"></i>
+						<?php echo trans('add_product'); ?>
+					</a>
+				</div>
+			<?php } ?>
             <?php $this->layout->load_view('invoices/partial_item_table'); ?>
 
             <hr/>
